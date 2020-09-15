@@ -4,7 +4,7 @@ This is the first lab for CIS*3210, created by Peter Hudel, SID 1012673.
 
 ## What this application does
 
-This is a simple web-based application that uses the template that was provided for the first lab. It uses Flask as a backend, and JQuery and default CCSS+HTML.
+This is a simple web-based application that uses the template that was provided for the first lab. It uses Flask as a backend, and JQuery and default CSS+HTML.
 
 This application simply displays a base home screen with a bit of interactivity. This screen has Link: an interactive friend to play with. You can press a button to make him play an animation, in addition to another button which shows an alert.
 
