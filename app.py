@@ -5,11 +5,15 @@ from flask import Flask, render_template, jsonify
 app = Flask(__name__, static_url_path='')
 #app.debug = True
 
-serverObject = {}
+serverObject = {"name": "serverObject"}
 
 @app.route('/')
 def index(name=None):
     return render_template('index.html', name=name)
+
+@app.route("/showObject", methods = ["GET"])
+def showObject():
+    return jsonify(serverObject)
 
 @app.route("/addToObject", methods = ["POST"])
 def addToObject():

@@ -1,7 +1,20 @@
 $(document).ready(function () {
     console.log("Peter Hudel, 1012673");
 	
-	//Replace with a Links animation
+    //Replace with a Links animation
+    
+    $('#show-object').click(function () {
+		$.ajax({
+            type: 'GET',
+            contentType: 'application/json',
+            url: '/showObject',
+            success: function (data) {
+                console.log(data);
+                $("#buttonText").text("Name of the object: " + data.name);
+            }
+        });
+    });
+
     $('#create-key').click(function () {
 		$.ajax({
             type: 'POST',

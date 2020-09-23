@@ -6,8 +6,8 @@ This is the second lab for CIS*3210, created by Peter Hudel, SID 1012673.
 What this application does
 --------------------------------
 
-This is a basic web application with one home page. This page contains three buttons
-that calls three different HTTP requests. It calls a PUT, POST and a DELETE.
+This is a basic web application with one home page. This page contains four buttons
+that calls four different HTTP requests. It calls a GET, PUT, POST and a DELETE.
 
 On the server, there is an object. This object contains how many times a user
 presses the "modify" button. By default, this object on the server does not keep
@@ -15,6 +15,8 @@ track of the number of times it is clicked. You first have to initialize this
 by clicking on the first button. Once the object is keeping track of the number
 of times you click the button, you can increment the count by clicking the 
 modify button. If you want to try deleting it, you can press the delete button.
+
+You can also press the "show object name" so view that the name on the server is "serverObject"
 
 There is very basic error handling. You cannot increment if the key was not created.
 You cannot delete a key that doesn't exist. And you cannot create a key that already
