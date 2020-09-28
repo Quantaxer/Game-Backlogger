@@ -2,6 +2,13 @@
 
 from flask import Flask, render_template, jsonify
 
+import MySQLdb
+import MySQLdb.cursors
+
+mycursor = MySQLdb.cursor()
+
+mycursor.execute("CREATE DATABASE IF NOT EXISTS 3210db")
+
 app = Flask(__name__, static_url_path='')
 #app.debug = True
 
@@ -12,8 +19,11 @@ def index(name=None):
     return render_template('index.html', name=name)
 
 @app.route("/showObject", methods = ["GET"])
-def showObject():
-    return jsonify(serverObject)
+def get_db():
+    db = MySQLdb.connect(host="127.0.0.1",
+    user="phudel",
+    passwd="1012673")
+    return jsonify(db)
 
 @app.route("/addToObject", methods = ["POST"])
 def addToObject():
