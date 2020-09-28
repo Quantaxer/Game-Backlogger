@@ -7,12 +7,10 @@ import MySQLdb
 db = MySQLdb.connect(host="dursley.socs.uoguelph.ca",
     user="phudel",
     passwd="1012673",
-    db="3210db"
+    db="phudel"
 )
 
 cur = MySQLdb.cursor()
-
-cur.execute('CREATE DATABASE IF NOT EXISTS 3210db')
 
 app = Flask(__name__, static_url_path='')
 #app.debug = True
