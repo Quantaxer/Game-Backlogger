@@ -10,8 +10,6 @@ db = MySQLdb.connect(host="dursley.socs.uoguelph.ca",
     db="phudel"
 )
 
-cur = MySQLdb.cursor()
-
 app = Flask(__name__, static_url_path='')
 #app.debug = True
 
