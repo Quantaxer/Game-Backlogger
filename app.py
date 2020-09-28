@@ -24,7 +24,7 @@ def index(name=None):
         )
 
         cur = MySQLdb.cursor()
-        cur.execute("CREATE TABLE `users` (`key` INT NOT NULL AUTO_INCREMENT, `username` VARCHAR(255) NOT NULL, `password` VARCHAR(255) NOT NULL;")
+        cur.execute("create table users1(id int auto_increment, name varchar(255) not null, password varchar(255) not null, primary key(id));")
     except:
         print("Error conencting and initializing the db")
 
