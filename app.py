@@ -3,7 +3,6 @@
 from flask import Flask, render_template, jsonify
 
 import MySQLdb
-import MySQLdb.cursors
 
 mycursor = MySQLdb.cursor()
 
