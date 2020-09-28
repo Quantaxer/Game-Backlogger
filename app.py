@@ -4,9 +4,11 @@ from flask import Flask, render_template, jsonify
 
 import MySQLdb
 
-db = MySQLdb.connect(host="127.0.0.1",
-user="phudel",
-passwd="1012673")
+db = MySQLdb.connect(host="dursley.socs.uoguelph.ca",
+    user="phudel",
+    passwd="1012673",
+    db="3210db"
+)
 
 cur = MySQLdb.cursor()
 
