@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="shortcut icon" href="#">
-		<title>CIS*3210 Lab 2</title>
+		<title>CIS*3210 Lab 3</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -25,17 +25,33 @@
 				<div class="cover-container">
 
 					<div class="inner cover">
-						<h1 class="cover-heading">CIS*3210 Lab 2</h1>
+						<h1 class="cover-heading">CIS*3210 Lab 3</h1>
 
-						<p id="buttonText">This text will change once you press a button!</p>
+						<form>
+							<input type="text" id="username" name="username" placeholder="Username" required>
+							<input type="password" id="password" name="password" placeholder="Password" required>
+							<input type="submit" id="login-submit" value="Log in">
+						</form>
+						<br>
+						<br>
 
-						<button id="show-object" class="btn btn-lg btn-info">Show name of the object</button>
+						<button id="query-db-row" class="btn btn-lg btn-info">Query for Witcher 3</button>
 
-						<button id="create-key" class="btn btn-lg btn-info">Start counting number of clicks</button>
+						<button id="add-db-row" class="btn btn-lg btn-info">Add a videogame!</button>
 						
-						<button id="modify-key" class="btn btn-lg btn-info">Increment counter!</button>
+						<button id="modify-db-row" class="btn btn-lg btn-info">Modify value of videogame</button>
 
-						<button id="delete-key" class="btn btn-lg btn-info">Delete counter</button>
+						<button id="delete-db-row" class="btn btn-lg btn-info">Delete videogame</button>
+
+						<div id="dbResults"></div>
+
+						<hr>
+
+						<h3 id="videogame-name"></h3>
+
+						<p id="videogame-description"></p>
+
+						<p id="videogame-priority"></p>
 						
 					</div>
 				</div>

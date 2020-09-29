@@ -1,53 +1,73 @@
 $(document).ready(function () {
     console.log("Peter Hudel, 1012673");
+    console.log("----FINDINGS ABOUT QUERY SANITATION----");
+    console.log("Findings about query sanitation: I learned that a user is able to directly inject their own query if you do not do this securely. This can be done by using parameterized statements.");
+    console.log("For example: String sql = \"SELECT * FROM users WHERE email = '\" + email + \" is bad. It is better to do String sql = \"SELECT * FROM users WHERE email = %s, (email,). This way the query is entered safely rather than directly into the code");
+    console.log("Reference: https://www.hacksplaining.com/prevention/sql-injection");
 	
-    //Replace with a Links animation
+    $('#login-submit').click(function () {
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            data: {username: $('#username').val(), password: $('#password').val()},
+            url: '/login',
+            success: function (data) {
+                $('#dbResults').html(data.status + " as " + data.user.username);
+            }
+        });
+    });
     
-    $('#show-object').click(function () {
+    $('#query-db-row').click(function () {
 		$.ajax({
             type: 'GET',
             contentType: 'application/json',
-            url: '/showObject',
+            url: '/query',
             success: function (data) {
-                console.log(data);
-                $("#buttonText").text("Name of the object: " + data.name);
+                if (data.numrows > 0) {
+                    $("#videogame-name").text("Name: " + data.res[0][1]);
+                    $("#videogame-description").text("Description: " + data.res[0][2]);
+                    $("#videogame-priority").text("Priority to play: " + data.res[0][3]);
+                }
+                else {
+                    $("#videogame-name").text("Name: ");
+                    $("#videogame-description").text("Description: ");
+                    $("#videogame-priority").text("Priority to play: ");
+                }
+                $('#dbResults').html(data.status);
             }
         });
     });
 
-    $('#create-key').click(function () {
+    $('#add-db-row').click(function () {
 		$.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: '/addToObject',
+            url: '/add',
             success: function (data) {
-                console.log(data);
-                $("#buttonText").text("Number of clicks: " + data.numberOfPresses);
+                $('#dbResults').html(data.status);
             }
         });
     });
 
-    $('#modify-key').click(function () {
+    $('#modify-db-row').click(function () {
         $.ajax({
             type: 'PUT',
             contentType: 'application/json',
-            url: '/modifyObject',
+            url: '/modify',
             success: function (data) {
-                console.log(data);
-                $("#buttonText").text("Number of clicks: " + data.numberOfPresses);
+                $('#dbResults').html(data.status);
             }
         });
   });
 
-  $('#delete-key').click(function () {
-    $.ajax({
-        type: 'DELETE',
-        contentType: 'application/json',
-        url: '/deleteFromObject',
-        success: function (data) {
-            console.log(data);
-            $("#buttonText").text("Number of clicks: " + data.numberOfPresses);
-        }
+    $('#delete-db-row').click(function () {
+        $.ajax({
+            type: 'DELETE',
+            contentType: 'application/json',
+            url: '/delete',
+            success: function (data) {
+                $('#dbResults').html(data.status);
+            }
+        });
     });
-});
 });
