@@ -29,7 +29,7 @@
 
 						{% if logged_in == False %}
 							{% if create_user == False %}
-								<h3>Please log in below</h3>
+								<h3 id="dbResults">Please log in below</h3>
 								<form>
 									<div class="form-group">
 										<label for="username">Username</label>
@@ -40,10 +40,10 @@
 										<input type="submit" class="btn btn-default" id="login-submit" value="Log in">
 									</div>
 								</form>
-
+								<hr>
 								<button class="btn btn-default" id="registerUser">Create a new user</button>
 							{% else %}
-								<h3>Register a new user below</h3>
+								<h3 id="dbResults">Register a new user below</h3>
 								<form>
 									<div class="form-group">
 										<label for="r-username">Username</label>
@@ -56,10 +56,9 @@
 										<input type="submit" id="r-submit" class="btn btn-default" value="Create User">
 									</div>
 								</form>
+								<hr>
 								<button class="btn btn-default" id="goBack">Cancel creating a user</button>
 							{% endif %}
-
-						<div id="dbResults"></div>
 
 						{% else %}
 
@@ -91,9 +90,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="footer">
+		<footer class="page-footer font-small blue pt-4">
 			<p>Developed by Peter Hudel, 1012673</p>
-		</div>
+		</footer>
 
 		<script src="/js/jquery.min.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
