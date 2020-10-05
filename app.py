@@ -1,6 +1,7 @@
 #!/usr/local/bin/python
 
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session, make_response
+import secrets
 
 import MySQLdb
 
@@ -25,18 +26,20 @@ except:
 
 
 app = Flask(__name__, static_url_path='')
+
+app.secret_key = secrets.token_urlsafe(16)
+
 #app.debug = True
 
 @app.route('/')
 def index():
-    if request.cookies.get('vidyaGameUID'):
-        return render_template('index.html')
-    else:
-        return render_template('login.html')
+    if 'isCreatingUser' not in session:
+        session['isCreatingUser'] = False
 
-@app.route('/registerUser')
-def registerUserPage():
-    return render_template('register.html')
+    if 'logged_in' in session:
+        return render_template('index.html', logged_in=session['logged_in'], username=session['username'], create_user=session['isCreatingUser'])
+    else:
+        return render_template('index.html', logged_in=False, username='', create_user=session['isCreatingUser'])
 
 @app.route("/login", methods = ["POST"])
 def get_db_credentials(name=None):
@@ -50,9 +53,8 @@ def get_db_credentials(name=None):
         if (cur.rowcount == 1):
 
             status = "Successfully logged in"
-            resp = make_response(jsonify(status=status))
-            resp.set_cookie('vidyaGameUID', result[0][0], 60*60)
-            return resp
+            session['logged_in'] = True
+            session['username'] = result[0][0]
         else:
             status = "Error logging in: Please check username and password"
     except Exception as e:
@@ -60,6 +62,17 @@ def get_db_credentials(name=None):
         status = "Some unknown error occurred"
 
     return jsonify(status=status)
+
+@app.route("/switchCreateUserState", methods = ["GET"])
+def switch_create_state():
+    session['isCreatingUser'] = not session['isCreatingUser']
+    return "True"
+
+@app.route("/logout", methods = ["GET"])
+def logout():
+    session['username'] = ""
+    session['logged_in'] = False
+    return "True"
 
 @app.route("/register", methods = ["POST"])
 def register_user(name=None):
@@ -77,7 +90,7 @@ def register_user(name=None):
         status = "Created new user"
     except Exception as e:
         print(e)
-        status = e
+        status = "User already exists"
 
     return jsonify(status=status)
 

@@ -23,6 +23,36 @@ $(document).ready(function () {
         });
     });
 
+    $('#registerUser').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/switchCreateUserState',
+            success: function (data) {
+                location.reload();
+            }
+        });
+    });
+
+    $('#logout').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/logout',
+            success: function (data) {
+                location.reload();
+            }
+        });
+    });
+
+    $('#goBack').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/switchCreateUserState',
+            success: function (data) {
+                location.reload();
+            }
+        });
+    });
+
     $('#r-submit').click(function () {
         event.preventDefault();
         $.ajax({
