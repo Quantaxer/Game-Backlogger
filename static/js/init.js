@@ -1,10 +1,5 @@
 $(document).ready(function () {
     console.log("Peter Hudel, 1012673");
-    console.log("----COOKIE SETTING DECISION----");
-    console.log(`I chose to set cookies on the server side on my Flask app because it was simply more convenient for authentication in my case. 
-    Because I do my authentication on a sql database, rather than setting a flag to tell the client that the authentication was successful, I'd rather set the
-    cookie as soon as I know that the login was good. From there, I can simply refresh the user's page to display the correct webpage. IF they do not have
-    the cookie, then they will be booted back to the login screen. I figured that this would make the app a bit more secure.`)
 
     $('#login-submit').click(function () {
         event.preventDefault();
