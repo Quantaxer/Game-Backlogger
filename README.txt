@@ -1,7 +1,7 @@
 Lab 3
 ==========
 
-This is the third lab for CIS*3210, created by Peter Hudel, SID 1012673.
+This is the fourth lab for CIS*3210, created by Peter Hudel, SID 1012673.
 
 What this application does
 --------------------------------
@@ -10,7 +10,10 @@ This application is a simple web app that has two main features: allowing the us
 as well as query a database (select, insert, update, delete).
 
 The first part (the logging in) allows the user to enter a username and password, then submits their credentials.
-The backend will open up a database of users and validate their username and password return a value.
+The backend will open up a database of users and validate their username and password return a value. From there,
+the server will set a cookoie on the browser letting the server know that the user has successfully authenticated, and will then display the other
+part of this application.
+
 > For the purposes of demonstrating this lab, the database has 1 user: username=bob, password=123. Use this user to test out the functionality.
 Note that query sanitation is performed and should work fine.
 

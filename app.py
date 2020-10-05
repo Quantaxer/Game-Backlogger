@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session, make_response
 
 import MySQLdb
 
@@ -27,36 +27,59 @@ except:
 app = Flask(__name__, static_url_path='')
 #app.debug = True
 
-user = {}
-
 @app.route('/')
-def index(name=None):
-    return render_template('index.html', name=name)
+def index():
+    if request.cookies.get('vidyaGameUID'):
+        return render_template('index.html')
+    else:
+        return render_template('login.html')
+
+@app.route('/registerUser')
+def registerUserPage():
+    return render_template('register.html')
 
 @app.route("/login", methods = ["POST"])
-def get_db_credentials():
-    global user
+def get_db_credentials(name=None):
     status = ""
     username = request.form['username']
     password = request.form['password']
 
     try:
-        if not user:
-            cur.execute("select * from users where username = %s and password = %s;", (username,password,))
-            result = cur.fetchall()
-            if (cur.rowcount == 1):
-                user = {
-                    "username": result[0][0]
-                } 
-                status = "Successfully logged in"
-            else:
-                status = "Error logging in: Please check username and password"
+        cur.execute("select * from users where username = %s and password = %s;", (username,password,))
+        result = cur.fetchall()
+        if (cur.rowcount == 1):
+
+            status = "Successfully logged in"
+            resp = make_response(jsonify(status=status))
+            resp.set_cookie('vidyaGameUID', result[0][0], 60*60)
+            return resp
         else:
-            status="User is already logged in"
+            status = "Error logging in: Please check username and password"
     except Exception as e:
         print(e)
         status = "Some unknown error occurred"
-    return jsonify(user=user, status=status)
+
+    return jsonify(status=status)
+
+@app.route("/register", methods = ["POST"])
+def register_user(name=None):
+    status = ""
+    username = request.form['username']
+    password = request.form['password']
+    confirmation = request.form['confirm']
+
+    if (not password == confirmation):
+        return jsonify(status="Passwords do not match")
+
+    try:
+        cur.execute("insert into users (username, password) values (%s, %s);", (username, password,))
+        db.commit()
+        status = "Created new user"
+    except Exception as e:
+        print(e)
+        status = e
+
+    return jsonify(status=status)
 
 
 @app.route("/query", methods = ["GET"])

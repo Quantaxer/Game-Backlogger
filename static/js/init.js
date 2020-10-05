@@ -1,10 +1,11 @@
 $(document).ready(function () {
     console.log("Peter Hudel, 1012673");
-    console.log("----FINDINGS ABOUT QUERY SANITATION----");
-    console.log("Findings about query sanitation: I learned that a user is able to directly inject their own query if you do not do this securely. This can be done by using parameterized statements.");
-    console.log("For example: String sql = \"SELECT * FROM users WHERE email = '\" + email + \" is bad. It is better to do String sql = \"SELECT * FROM users WHERE email = %s, (email,). This way the query is entered safely rather than directly into the code");
-    console.log("Reference: https://www.hacksplaining.com/prevention/sql-injection");
-	
+    console.log("----COOKIE SETTING DECISION----");
+    console.log(`I chose to set cookies on the server side on my Flask app because it was simply more convenient for authentication in my case. 
+    Because I do my authentication on a sql database, rather than setting a flag to tell the client that the authentication was successful, I'd rather set the
+    cookie as soon as I know that the login was good. From there, I can simply refresh the user's page to display the correct webpage. IF they do not have
+    the cookie, then they will be booted back to the login screen. I figured that this would make the app a bit more secure.`)
+
     $('#login-submit').click(function () {
         event.preventDefault();
         $.ajax({
@@ -12,7 +13,29 @@ $(document).ready(function () {
             data: {username: $('#username').val(), password: $('#password').val()},
             url: '/login',
             success: function (data) {
-                $('#dbResults').html(data.status + " as " + data.user.username);
+                if (data.status === "Successfully logged in") {
+                    location.reload();
+                }
+                else{
+                    $('#dbResults').html(data.status);
+                }
+            }
+        });
+    });
+
+    $('#r-submit').click(function () {
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            data: {username: $('#r-username').val(), password: $('#r-password').val(), confirm: $('#r-password2').val()},
+            url: '/register',
+            success: function (data) {
+                if (data.status === "Created new user") {
+                    $(location).attr('href', '/')
+                }
+                else{
+                    $('#dbResults').html(data.status);
+                }
             }
         });
     });
