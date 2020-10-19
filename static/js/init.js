@@ -118,4 +118,18 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#wiki-title-submit').click(function () {
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            data: {title: $('#wikiTitle').val()},
+            url: '/searchTheWiki',
+            success: function (data) {
+                $("#wiki-image").attr("src",data.image);
+                $("#wikiSummary").text(data.summary);
+                $('#wikiResults').html(data.status);
+            }
+        });
+    })
 });

@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="shortcut icon" href="#">
-		<title>CIS*3210 Lab 4 - Home</title>
+		<title>CIS*3210 Lab 6 - Home</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
 				<div class="cover-container">
 
 					<div class="inner cover">
-						<h1 class="cover-heading">CIS*3210 Lab 4</h1>
+						<h1 class="cover-heading">CIS*3210 Lab 6</h1>
 
 						{% if logged_in == False %}
 							{% if create_user == False %}
@@ -64,25 +64,29 @@
 
 							<h2>Welcome {{username}}</h2>
 
-							<button id="query-db-row" class="btn btn-lg btn-info">Query for Witcher 3</button>
-
-							<button id="add-db-row" class="btn btn-lg btn-info">Add a videogame!</button>
-							
-							<button id="modify-db-row" class="btn btn-lg btn-info">Modify value of videogame</button>
-
-							<button id="delete-db-row" class="btn btn-lg btn-info">Delete videogame</button>
-
-							<div id="dbResults"></div>
-
-							<hr>
-
-							<h3 id="videogame-name"></h3>
-
-							<p id="videogame-description"></p>
-
-							<p id="videogame-priority"></p>
-							
 							<button id="logout" class="btn btn-default">Log out</button>
+							
+							<h3>Search on Wikipedia for a video game!</h3>
+
+							<div id="wikiResults"></div>
+
+							<form>
+								<div class="form-group">
+									<label for="wikiTitle">Name of video game</label>
+									<input type="text" class="form-control" id="wikiTitle" name="wikiTitle" placeholder="Title of video game" required>
+									<br>
+									<input type="submit" id="wiki-title-submit" class="btn btn-default" value="Search for video game">
+								</div>
+							</form>
+
+							<div class="gridRow">
+								<div class="gridColumn">
+									<img id="wiki-image" src=""/>
+								</div>
+								<div class="gridColumn">
+									<p id="wikiSummary"></p>
+								</div>
+							</div>
 
 						{% endif %}
 						

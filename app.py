@@ -5,6 +5,9 @@ import secrets
 
 import MySQLdb
 
+# My API functions
+from api import *
+
 try:
     db = MySQLdb.connect(host="dursley.socs.uoguelph.ca",
         user="phudel",
@@ -70,8 +73,8 @@ def switch_create_state():
 
 @app.route("/logout", methods = ["GET"])
 def logout():
-    session['username'] = ""
-    session['logged_in'] = False
+    session.pop('username', None)
+    session.pop('logged_in', None)
     return "True"
 
 @app.route("/register", methods = ["POST"])
@@ -150,3 +153,25 @@ def deleteObject():
         status = "Failed deleting from database"
         db.rollback()
     return jsonify(res={}, status=status)
+
+@app.route("/searchTheWiki", methods = ["POST"])
+def searchTheWiki():
+    queryTitle = request.form['title']
+    summary = ""
+    image = ""
+    status = ""
+    try:
+        title = searchForPage(queryTitle)
+        title = title[0]
+        
+        if (isVideoGame(title)):
+            summary = getPageSummary(title, 5)
+            image = getPageImage(title)
+            status="Success"
+            return jsonify(summary=summary, image=image, status=status)
+        else:
+            status = "ERROR: That is not a video game! (If it is, please add `(video game)` to the end of the title"
+    except Exception as e:
+        print(e)
+        status = "Page does not exist"
+    return jsonify(status=status)
