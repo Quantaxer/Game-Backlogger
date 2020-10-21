@@ -1,5 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  margin: 20px;
+}
+
 body {
-    background-color: #14b9d6;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: azure;
+  background-color: #1d2d50;
+}
+
+/* Style the header */
+.header {
+  background-color: #133b5c;
+  box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+  padding: 20px;
+  text-align: left;
+}
+
+.mainBody {
+  height: 80%;
+}
+
+/* Container for flexboxes */
+.row {
+  height: 80%;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.row2 {
+  height: 100%;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+/* Create three unequal columns that sits next to each other */
+.column {
+  padding: 10px;
+}
+
+/* Left and right column */
+.column.side {
+   -webkit-flex: 1;
+   -ms-flex: 1;
+   flex: 1;
+}
+
+/* Middle column */
+.column.middle {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+}
+
+/* Style the footer */
+.footer {
+  padding: 10px;
+  text-align: center;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .row {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+  .row2 {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
 }
 
 /* Create two equal columns that floats next to each other */
@@ -7,7 +85,8 @@ body {
     float: left;
     width: 50%;
     padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
+    justify-content: center;
+    display: flex;
   }
   
   /* Clear floats after the columns */

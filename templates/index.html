@@ -1,105 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="shortcut icon" href="#">
-		<title>CIS*3210 Lab 6 - Home</title>
 
-		<!-- Bootstrap core CSS -->
-		<link href="/css/bootstrap.min.css" rel="stylesheet">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" href="#">
+	<title>CIS*3210 Lab 6 - Home</title>
 
-		<!-- Custom styles for this template -->
-		<link href="/css/cover.css" rel="stylesheet">
-		<link href="/css/custom.css" rel="stylesheet">
-	</head>
+	<!-- Bootstrap core CSS -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
 
-	<body>
+	<!-- Custom styles for this template -->
+	<link href="/css/cover.css" rel="stylesheet">
+	<link href="/css/custom.css" rel="stylesheet">
+</head>
 
-		<div class="site-wrapper">
-			<div class="site-wrapper-inner">
-				<div class="cover-container">
-
-					<div class="inner cover">
-						<h1 class="cover-heading">CIS*3210 Lab 6</h1>
-
-						{% if logged_in == False %}
-							{% if create_user == False %}
-								<h3 id="dbResults">Please log in below</h3>
-								<form>
-									<div class="form-group">
-										<label for="username">Username</label>
-										<input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-										<label for="password">Password</label>
-										<input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-										<br>
-										<input type="submit" class="btn btn-default" id="login-submit" value="Log in">
-									</div>
-								</form>
-								<hr>
-								<button class="btn btn-default" id="registerUser">Create a new user</button>
-							{% else %}
-								<h3 id="dbResults">Register a new user below</h3>
-								<form>
-									<div class="form-group">
-										<label for="r-username">Username</label>
-										<input type="text" class="form-control" id="r-username" name="username" placeholder="Username" required>
-										<label for="r-password">Password</label>
-										<input type="password" class="form-control" id="r-password" name="password" placeholder="Password" required>
-										<label for="r-password2">Confirm Password</label>
-										<input type="password" class="form-control" id="r-password2" name="password" placeholder="Confirm password" required>
-										<br>
-										<input type="submit" id="r-submit" class="btn btn-default" value="Create User">
-									</div>
-								</form>
-								<hr>
-								<button class="btn btn-default" id="goBack">Cancel creating a user</button>
-							{% endif %}
-
-						{% else %}
-
-							<h2>Welcome {{username}}</h2>
-
-							<button id="logout" class="btn btn-default">Log out</button>
-							
-							<h3>Search on Wikipedia for a video game!</h3>
-
-							<div id="wikiResults"></div>
-
-							<form>
-								<div class="form-group">
-									<label for="wikiTitle">Name of video game</label>
-									<input type="text" class="form-control" id="wikiTitle" name="wikiTitle" placeholder="Title of video game" required>
-									<br>
-									<input type="submit" id="wiki-title-submit" class="btn btn-default" value="Search for video game">
-								</div>
-							</form>
-
-							<div class="gridRow">
-								<div class="gridColumn">
-									<img id="wiki-image" src=""/>
-								</div>
-								<div class="gridColumn">
-									<p id="wikiSummary"></p>
-								</div>
+<body>
+	<div class=header>
+		<h1>The Game Backlogger</h1>
+		<h5>For organizing which game to play first!</h5>
+	</div>
+	<br>
+	<div class="mainBody">
+		{% if logged_in == False %}
+		<div class="row">
+			{% if create_user == False %}
+			<div class="column side"></div>
+			<div class="column middle">
+				<div class="loginDiv">
+					<h2 id="dbResults" style="text-align: center;">Please log in below</h2>
+					<form>
+						<div class="form-group">
+							<label for="username" style="text-align: left;">Username</label>
+							<input type="text" class="form-control" id="username" name="username" placeholder="Username"
+								required>
+							<br>
+							<label for="password" style="text-align: left;"> Password</label>
+							<input type="password" class="form-control" id="password" name="password"
+								placeholder="Password" required>
+							<br>
+							<div style="text-align: center;">
+								<input type="submit" class="btn btn-default" id="login-submit" value="Log in">
 							</div>
-
-						{% endif %}
-						
+						</div>
+					</form>
+					<div style="text-align: left;">
+						<button class="btn btn-default" id="registerUser">Or, you can create a new user</button>
 					</div>
 				</div>
 			</div>
+			<div class="column side"></div>
+			{% else %}
+			<div class="column side"></div>
+			<div class="column middle">
+				<h2 style="text-align: center;" id="dbResults">Register a new user below</h2>
+				<form>
+					<div class="form-group">
+						<label for="r-username">Username</label>
+						<input type="text" class="form-control" id="r-username" name="username" placeholder="Username"
+							required>
+						<br>
+						<label for="r-password">Password</label>
+						<input type="password" class="form-control" id="r-password" name="password"
+							placeholder="Password" required>
+						<br>
+						<label for="r-password2">Confirm Password</label>
+						<input type="password" class="form-control" id="r-password2" name="password"
+							placeholder="Confirm password" required>
+						<br>
+						<div style="text-align: center;">
+							<input type="submit" id="r-submit" class="btn btn-default" value="Create User">
+						</div>
+					</div>
+				</form>
+				<hr>
+				<button class="btn btn-default" id="goBack">Cancel creating a user</button>
+			</div>
+			<div class="column side"></div>
 		</div>
-		<footer class="page-footer font-small blue pt-4">
-			<p>Developed by Peter Hudel, 1012673</p>
-		</footer>
+		{% endif %}
+		{% else %}
+		<div style="text-align: center;">
+			<h2>Welcome, {{username}}!</h2>
+			<button id="logout" class="btn btn-default">Log out</button>
+			<br><br><br>
+			<h3>Search on Wikipedia for a video game!</h3>
+			<div style="display: inline-block; width: 40%;">
+				<form style="display:flex; flex-direction: row;">
+						<input type="text" class="form-control" style="display: block;" id="wikiTitle" name="wikiTitle"
+							placeholder="Title of video game" required>
+						<br>
+						<input type="submit" id="wiki-title-submit" class="btn btn-default" value="Search for video game">
+				</form>
+			</div>
+			<div id="wikiResults"></div>
+		</div>
+		<div class="row">
+			<div class="column side" style="padding-left: 30px;"></div>
+			<div class="column middle">
 
-		<script src="/js/jquery.min.js"></script>
-		<script src="/js/bootstrap.min.js"></script>
-		<script src="/js/init.js"></script>
-	</body>
+				<div class="gridRow">
+					<div class="gridColumn">
+						<img id="wiki-image" src="" />
+					</div>
+					<div class="gridColumn">
+						<p id="wikiSummary"></p>
+					</div>
+				</div>
+			</div>
+			<div class="column side"></div>
+		</div>
+		{% endif %}
+
+	</div>
+	</div>
+	<br>
+	<br>
+	<hr>
+	<div class="footer">
+		<p><i>Developed by Peter Hudel, 1012673</i></p>
+	</div>
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/init.js"></script>
+</body>
+
 </html>

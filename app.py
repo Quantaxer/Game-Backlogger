@@ -165,7 +165,7 @@ def searchTheWiki():
         title = title[0]
         
         if (isVideoGame(title)):
-            summary = getPageSummary(title, 5)
+            summary = getPageSummary(title, 3)
             image = getPageImage(title)
             status="Success"
             return jsonify(summary=summary, image=image, status=status)

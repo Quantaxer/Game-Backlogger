@@ -126,6 +126,7 @@ $(document).ready(function () {
             data: {title: $('#wikiTitle').val()},
             url: '/searchTheWiki',
             success: function (data) {
+                console.log(data);
                 $("#wiki-image").attr("src",data.image);
                 $("#wikiSummary").text(data.summary);
                 $('#wikiResults').html(data.status);
