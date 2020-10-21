@@ -8,6 +8,9 @@ import MySQLdb
 # My API functions
 from api import *
 
+# CHANGE THIS EVENTUALLY ONCE NEED TO LOG IN
+alwaysLoggedIn = True
+
 try:
     db = MySQLdb.connect(host="dursley.socs.uoguelph.ca",
         user="phudel",
@@ -38,11 +41,14 @@ app.secret_key = secrets.token_urlsafe(16)
 def index():
     if 'isCreatingUser' not in session:
         session['isCreatingUser'] = False
-
-    if 'logged_in' in session:
-        return render_template('index.html', logged_in=session['logged_in'], username=session['username'], create_user=session['isCreatingUser'])
+    
+    if alwaysLoggedIn:
+        return render_template('index.html', logged_in=alwaysLoggedIn, username="bobbyboi", create_user=session['isCreatingUser'])
     else:
-        return render_template('index.html', logged_in=False, username='', create_user=session['isCreatingUser'])
+        if 'logged_in' in session:
+            return render_template('index.html', logged_in=session['logged_in'], username=session['username'], create_user=session['isCreatingUser'])
+        else:
+            return render_template('index.html', logged_in=False, username='', create_user=session['isCreatingUser'])
 
 @app.route("/login", methods = ["POST"])
 def get_db_credentials(name=None):
