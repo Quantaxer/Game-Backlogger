@@ -48,7 +48,7 @@ def getPageImage(title):
     res = callAPI(extraParams=params)
     return(res['query']['pages'][0]['original']['source'])
 
-def isVideoGame(title):
+def getCategories(title):
     params = {
         'action': 'query',
         'prop': 'categories',
@@ -57,8 +57,11 @@ def isVideoGame(title):
         'cllimit': 'max'
     }
     res = callAPI(extraParams=params)
-    res = res['query']['pages'][0]['categories']
-    for category in res:
+    return res['query']['pages'][0]['categories']
+
+def isVideoGame(title):
+    categories = getCategories(title)
+    for category in categories:
         if bool(re.search("video game", category['title'], re.IGNORECASE)):
             return True
     

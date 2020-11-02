@@ -163,6 +163,8 @@ def deleteObject():
 @app.route("/searchTheWiki", methods = ["POST"])
 def searchTheWiki():
     queryTitle = request.form['title']
+    numSentences = request.form['sentences']
+    displayCategories = request.form['showCategories']
     summary = ""
     image = ""
     status = ""
@@ -171,10 +173,14 @@ def searchTheWiki():
         title = title[0]
         
         if (isVideoGame(title)):
-            summary = getPageSummary(title, 3)
+            summary = getPageSummary(title, numSentences)
             image = getPageImage(title)
             status="Success"
-            return jsonify(summary=summary, image=image, status=status)
+            if displayCategories == "true":
+                categories = getCategories(title)
+                return jsonify(summary=summary, image=image, status=status, categories=categories)
+            else:
+                return jsonify(summary=summary, image=image, status=status, categories={})
         else:
             status = "ERROR: That is not a video game! (If it is, please add `(video game)` to the end of the title"
     except Exception as e:

@@ -123,14 +123,38 @@ $(document).ready(function () {
         event.preventDefault();
         $.ajax({
             type: 'POST',
-            data: {title: $('#wikiTitle').val()},
+            data: {title: $('#wikiTitle').val(), sentences: $('#numSentenceSummary').val(), showCategories: $('#showCategories').prop('checked')},
             url: '/searchTheWiki',
             success: function (data) {
-                console.log(data);
+                let categoryString = "";
+                let i = 0;
                 $("#wiki-image").attr("src",data.image);
                 $("#wikiSummary").text(data.summary);
                 $('#wikiResults').html(data.status);
+                if (Object.entries(data.categories).length > 0) {
+                    for (let category of data.categories) {
+                        categoryString = categoryString + category['title'].split("Category:")[1] + ', ';
+                        if (i > 10) {
+                            break;
+                        }
+                        i++;
+                    }
+                }
+                $('#categories').html(categoryString);
             }
         });
     })
+
+    $('#sampleGames').change(function() {
+        $('#wikiTitle').val($('#sampleGames').val());
+    });
 });
+
+var slider = document.getElementById("numSentenceSummary");
+var output = document.getElementById("sliderOutput");
+output.innerHTML = "Number of sentences in video game summary: " + slider.value;
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  output.innerHTML = "Number of sentences in video game summary: " + this.value;
+}

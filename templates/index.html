@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="#">
-	<title>CIS*3210 Lab 6 - Home</title>
+	<title>CIS*3210 Lab 8 - Home</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -90,12 +90,31 @@
 			<br><br><br>
 			<h3>Search on Wikipedia for a video game!</h3>
 			<div style="display: inline-block; width: 40%;">
-				<form style="display:flex; flex-direction: row;">
+				<form>
+
+					<div class="slidecontainer">
+						<label id="sliderOutput" for="numSentenceSummary"></label>
+						<input type="range" min="1" max="5" value="3" class="slider" id="numSentenceSummary">
+						<input type="checkbox" id="showCategories">
+  						<label for="showCategories">Show Categories of Page</label><br>
+					</div>
+					<br>
+					<div style="display:flex; flex-direction: row;">
 						<input type="text" class="form-control" style="display: block;" id="wikiTitle" name="wikiTitle"
 							placeholder="Title of video game" required>
-						<br>
 						<input type="submit" id="wiki-title-submit" class="btn btn-default" value="Search for video game">
+					</div>
 				</form>
+				<p>Or, you can autofill the video game title with some examples!</p>
+				<select class="form-control" id="sampleGames">
+					<option value="" selected disabled>Sample Video Games</option>
+					<option value="Witcher 3">Witcher 3</option>
+					<option value="Fallout New Vegas">Fallout New Vegas</option>
+					<option value="Bioshock Infinite">Bioshock Infinite</option>
+					<option value="Horizon Zero Dawn">Horizon Zero Dawn</option>
+					<option value="Hades (video game)">Hades (video game)</option>
+				</select>
+
 			</div>
 			<div id="wikiResults"></div>
 		</div>
@@ -112,7 +131,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="column side"></div>
+			<div class="column side">
+				<p>Categories: </p>
+				<p id="categories"></p>
+			</div>
 		</div>
 		{% endif %}
 
