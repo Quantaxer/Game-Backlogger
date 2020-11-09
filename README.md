@@ -1,6 +1,6 @@
 # Lab 89
 
-This is the Nint lab for CIS*3210, created by Peter Hudel, SID 1012673.
+This is the Ninth lab for CIS*3210, created by Peter Hudel, SID 1012673.
 
 ## What this application does
 

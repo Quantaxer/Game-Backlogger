@@ -5,12 +5,11 @@ function updateTable() {
     let i = 1;
     $('#gameTable').find("tr:gt(0)").remove();
     gameList.forEach(function(game) {
-
         game = game.data;
         if (tempGameList.indexOf(game.title) === -1) {
             tempGameList.push(game.title);
-            $('#gameTable').append(
-                `<tr>
+            $('#gameTable tbody').append(
+                `<tr id="${"td_" + i}">
                     <td>${i}</td>
                     <td>${game.title}</td>
                     <td>${game.summary}</td>
@@ -55,7 +54,8 @@ $(document).ready(function () {
         });
     })
 
-    $(document).on("click", "#gameTable tr td", function(e) {
+    $(document).on("click", "#gameTable tbody tr td", function(e) {
+        console.log("hh")
         let row = $(this).closest("tr");
         let title = row.find("td:eq(1)").text();
         gameList.forEach(function(game) {
@@ -67,6 +67,26 @@ $(document).ready(function () {
 
             }
         });
+    });
+
+    $('tbody').sortable({
+        items: "> tr:not(:first)",
+        update: function(event, ui) {
+            let strippedArray = [];
+            for (item of ($('tbody').sortable('toArray'))) {
+                if (item !== "") {
+                    strippedArray.push(item.split('_')[1]);
+                }
+            }
+            console.log(gameList);
+            let newGameList = [];
+
+            for (let index of strippedArray) {
+                newGameList.push(gameList[parseInt(index) - 1]);
+            }
+            gameList = newGameList;
+            updateTable();
+        }
     });
 
     $('#deleteSelected').click(function() {

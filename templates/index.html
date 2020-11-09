@@ -61,9 +61,9 @@
 				<h3 id="selectedGame"></h3>
 			</div>
 			<div class="column middle">
-				<div id = "tableDiv">
-					<button id="deleteSelected">Delete Selected Game</button>
-					<table id = 'gameTable'>
+				<button id="deleteSelected">Delete Selected Game</button>
+				<table id = 'gameTable' class="grid">
+					<thead>
 						<tr>
 							<th>Ranking</th>
 							<th>Title</th>
@@ -71,8 +71,10 @@
 							<th>Categories</th>
 							<th>URL</th>
 						</tr>
-					</table>
-				</div>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
 			</div>
 			<div class="column side"></div>
 		</div>
@@ -86,6 +88,7 @@
 	</div>
 
 	<script src="/js/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/init.js"></script>
 </body>
