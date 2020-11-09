@@ -11,7 +11,7 @@ from api import *
 # CHANGE THIS EVENTUALLY ONCE NEED TO LOG IN
 alwaysLoggedIn = True
 
-try:
+"""try:
     db = MySQLdb.connect(host="dursley.socs.uoguelph.ca",
         user="phudel",
         passwd="1012673",
@@ -28,7 +28,7 @@ except:
 try:
     cur.execute("insert into users (username, password) values ('bob', '123');")
 except:
-    print("bob already exists")
+    print("bob already exists")"""
 
 
 app = Flask(__name__, static_url_path='')
@@ -164,7 +164,6 @@ def deleteObject():
 def searchTheWiki():
     queryTitle = request.form['title']
     numSentences = request.form['sentences']
-    displayCategories = request.form['showCategories']
     summary = ""
     image = ""
     status = ""
@@ -175,12 +174,10 @@ def searchTheWiki():
         if (isVideoGame(title)):
             summary = getPageSummary(title, numSentences)
             image = getPageImage(title)
+            url = getURL(title)
             status="Success"
-            if displayCategories == "true":
-                categories = getCategories(title)
-                return jsonify(summary=summary, image=image, status=status, categories=categories)
-            else:
-                return jsonify(summary=summary, image=image, status=status, categories={})
+            categories = getCategories(title)
+            return jsonify(title=title, summary=summary, image=image, status=status, categories=categories, url=url)
         else:
             status = "ERROR: That is not a video game! (If it is, please add `(video game)` to the end of the title"
     except Exception as e:

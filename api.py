@@ -48,6 +48,17 @@ def getPageImage(title):
     res = callAPI(extraParams=params)
     return(res['query']['pages'][0]['original']['source'])
 
+def getURL(title):
+    params = {
+        'action': 'query',
+        'prop': 'info',
+        'titles': title,
+        'redirects': 'true',
+        'inprop': 'url'
+    }
+    res = callAPI(extraParams=params)
+    return res['query']['pages'][0]['canonicalurl']
+
 def getCategories(title):
     params = {
         'action': 'query',
