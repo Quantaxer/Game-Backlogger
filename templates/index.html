@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="#">
-	<title>CIS*3210 Lab 9 - Home</title>
+	<title>CIS*3210 Lab 10 - Home</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -23,46 +23,55 @@
 	<div class=header>
 		<h1>The Game Backlogger</h1>
 		<h5>For organizing which game to play first!</h5>
+		<p>Developed by Peter Hudel</p>
 	</div>
 	<br>
-	<div class="mainBody">
+	<div class="mainBody" id="bodyDiv">
 		<div style="text-align: center;">
-			<h3>Search on Wikipedia for a video game!</h3>
-			<div style="display: inline-block; width: 40%;">
+			<div class="inputForm">
+				<h3>Add a video game to your backlog!</h3>
 				<form>
-
 					<div class="slidecontainer">
 						<label id="sliderOutput" for="numSentenceSummary"></label>
-						<input type="range" min="1" max="5" value="3" class="slider" id="numSentenceSummary">
+						<input type="range" min="1" max="3" value="2" class="slider" id="numSentenceSummary">
 					</div>
 					<br>
-					<div style="display:flex; flex-direction: row;">
-						<input type="text" class="form-control" style="display: block;" id="wikiTitle" name="wikiTitle"
-							placeholder="Title of video game" required>
-						<input type="submit" id="wiki-title-submit" class="btn btn-default" value="Search for video game">
+					<div class="flex-container">
+						<div style="width: 70%;">
+							<label for="wikiTitle">Type in a video game title</label>
+							<input type="text" class="form-control" style="display: block;" id="wikiTitle" name="wikiTitle"
+								placeholder="Type in title of video game" required>
+						</div>
+						<div style="width: 30%;">
+							<label for="sampleGames">Example Games</p>
+							<select class="form-control" id="sampleGames">
+								<option value="" selected disabled>Sample Video Games</option>
+								<option value="Witcher 3">Witcher 3</option>
+								<option value="Fallout New Vegas">Fallout New Vegas</option>
+								<option value="Bioshock Infinite">Bioshock Infinite</option>
+								<option value="Horizon Zero Dawn">Horizon Zero Dawn</option>
+								<option value="Hades (video game)">Hades (video game)</option>
+							</select>
+						</div>
 					</div>
+					<input type="submit" id="wiki-title-submit" class="btn btn-default" value="Search for video game">
 				</form>
-				<p>Or, you can autofill the video game title with some examples!</p>
-				<select class="form-control" id="sampleGames">
-					<option value="" selected disabled>Sample Video Games</option>
-					<option value="Witcher 3">Witcher 3</option>
-					<option value="Fallout New Vegas">Fallout New Vegas</option>
-					<option value="Bioshock Infinite">Bioshock Infinite</option>
-					<option value="Horizon Zero Dawn">Horizon Zero Dawn</option>
-					<option value="Hades (video game)">Hades (video game)</option>
-				</select>
-
 			</div>
+			<br><br>
 			<div id="wikiResults"></div>
 		</div>
 		<div class="row">
-			<div class="column side" style="padding-left: 30px;">
+			<div class="column side" style="padding-left: 30px; text-align: center;">
+				<u><h2 id="selectedText"></h2></u>
 				<img id="wiki-image" src="" />
 				<h3 id="selectedGame"></h3>
 			</div>
 			<div class="column middle">
-				<button id="deleteSelected">Delete Selected Game</button>
-				<table id = 'gameTable' class="grid">
+				<br><br>
+				<button class="btn btn-default" id="deleteSelected">Delete Selected Game</button>
+				<br>
+				<br>
+				<table id = 'gameTable' class="table table-hover">
 					<thead>
 						<tr>
 							<th>Ranking</th>
@@ -83,9 +92,6 @@
 	<br>
 	<br>
 	<hr>
-	<div class="footer">
-		<p><i>Developed by Peter Hudel, 1012673</i></p>
-	</div>
 
 	<script src="/js/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

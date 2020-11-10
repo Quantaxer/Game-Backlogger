@@ -1,4 +1,4 @@
-# Lab 89
+# Lab 9
 
 This is the Ninth lab for CIS*3210, created by Peter Hudel, SID 1012673.
 

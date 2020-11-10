@@ -14,7 +14,7 @@ function updateTable() {
                     <td>${game.title}</td>
                     <td>${game.summary}</td>
                     <td>${game.categories}</td>
-                    <td><a href="${game.url}">Wikipedia Article</a></td>
+                    <td><a href="${game.url}">${game.url}</a></td>
                 </tr>`
             );
 
@@ -36,20 +36,27 @@ $(document).ready(function () {
             data: {title: $('#wikiTitle').val(), sentences: $('#numSentenceSummary').val()},
             url: '/searchTheWiki',
             success: function (data) {
-                let categoryString = "";
-                let i = 0;
-                if (Object.entries(data.categories).length > 0) {
-                    for (let category of data.categories) {
-                        categoryString = categoryString + category['title'].split("Category:")[1] + ', ';
-                        if (i > 5) {
-                            break;
+                $('#wikiTitle').val("");
+                $('#sampleGames').val("");
+                if (data.status === "Success") {
+                    let categoryString = "";
+                    let i = 0;
+                    if (Object.entries(data.categories).length > 0) {
+                        for (let category of data.categories) {
+                            categoryString = categoryString + category['title'].split("Category:")[1] + ', ';
+                            if (i === 3) {
+                                break;
+                            }
+                            i++;
                         }
-                        i++;
                     }
+                    data.categories = categoryString;
+                    gameList.push({data});
+                    updateTable();
                 }
-                data.categories = categoryString;
-                gameList.push({data});
-                updateTable();
+                else {
+                    $('#wikiResults').html(data.status);
+                }
             }
         });
     })
@@ -64,13 +71,13 @@ $(document).ready(function () {
             if (title === game.title) {
                 $("#wiki-image").attr("src", game.image);
                 $('#selectedGame').html(game.title);
+                $('#selectedText').html("Selected Game");
 
             }
         });
     });
 
     $('tbody').sortable({
-        items: "> tr:not(:first)",
         update: function(event, ui) {
             let strippedArray = [];
             for (item of ($('tbody').sortable('toArray'))) {
@@ -99,6 +106,7 @@ $(document).ready(function () {
         updateTable();
         $("#wiki-image").attr("src", "");
         $('#selectedGame').html("");
+        $('#selectedText').html("");
     });
 
     $('#sampleGames').change(function() {
