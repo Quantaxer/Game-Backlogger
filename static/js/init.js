@@ -63,7 +63,6 @@ $(document).ready(function () {
     })
 
     $(document).on("click", "#gameTable tbody tr td", function(e) {
-        console.log("hh")
         let row = $(this).closest("tr");
         let title = row.find("td:eq(1)").text();
         gameList.forEach(function(game) {
@@ -73,7 +72,7 @@ $(document).ready(function () {
                 $("#wiki-image").attr("src", game.image);
                 $('#selectedGame').html(game.title);
                 $('#selectedText').html("Selected Game");
-
+                $('#wikiResults').html("Selected " + game.title + ".");
             }
         });
     });
