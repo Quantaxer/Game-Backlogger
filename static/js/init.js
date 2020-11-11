@@ -51,6 +51,7 @@ $(document).ready(function () {
                         }
                     }
                     data.categories = categoryString;
+                    $('#wikiResults').html("Successfully added: " + data.title + ".");
                     gameList.push({data});
                     updateTable();
                 }
@@ -98,15 +99,21 @@ $(document).ready(function () {
 
     $('#deleteSelected').click(function() {
         let title = $('#selectedGame').text();
+        console.log(title);
+        if (title === "") {
+            $('#wikiResults').html("No game selected.");
+        }
+        else {
+            gameList = gameList.filter(function( obj ) {
+                return obj.data.title !== title;
+            });
 
-        gameList = gameList.filter(function( obj ) {
-            return obj.data.title !== title;
-        });
-
-        updateTable();
-        $("#wiki-image").attr("src", "");
-        $('#selectedGame').html("");
-        $('#selectedText').html("");
+            updateTable();
+            $("#wiki-image").attr("src", "");
+            $('#wikiResults').html("Removed " + title + ".");
+            $('#selectedGame').html("");
+            $('#selectedText').html("");
+        }
     });
 
     $('#sampleGames').change(function() {

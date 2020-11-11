@@ -32,6 +32,14 @@ body {
   color: azure;
 }
 
+#wiki-title-submit {
+  filter: drop-shadow(2px 2px 1px #000);
+}
+
+#deleteSelected {
+  filter: drop-shadow(2px 2px 1px #000);
+}
+
 .inputForm {
   display: inline-block; 
   width: 60%; 

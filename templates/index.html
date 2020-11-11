@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="#">
-	<title>CIS*3210 Lab 10 - Home</title>
+	<title>CIS*3210 Lab 10</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -20,8 +20,8 @@
 </head>
 
 <body>
-	<div class=header>
-		<h1>The Game Backlogger</h1>
+	<div class="header">
+		<h1 style="filter: drop-shadow(2px 2px 1px #000);">The Game Backlogger</h1>
 		<h5>For organizing which game to play first!</h5>
 		<p>Developed by Peter Hudel</p>
 	</div>
@@ -29,7 +29,8 @@
 	<div class="mainBody" id="bodyDiv">
 		<div style="text-align: center;">
 			<div class="inputForm">
-				<h3>Add a video game to your backlog!</h3>
+				<h2 style="filter: drop-shadow(2px 2px 1px #000);">Add a video game to your backlog!</h2>
+				<br>
 				<form>
 					<div class="slidecontainer">
 						<label id="sliderOutput" for="numSentenceSummary"></label>
@@ -54,7 +55,8 @@
 							</select>
 						</div>
 					</div>
-					<input type="submit" id="wiki-title-submit" class="btn btn-default" value="Search for video game">
+					<br>
+					<input type="submit" id="wiki-title-submit" class="btn btn-primary" value="Add game to backlog">
 				</form>
 			</div>
 			<br><br>
@@ -68,7 +70,7 @@
 			</div>
 			<div class="column middle">
 				<br><br>
-				<button class="btn btn-default" id="deleteSelected">Delete Selected Game</button>
+				<button class="btn btn-primary" id="deleteSelected">Delete Selected Game</button>
 				<br>
 				<br>
 				<table id = 'gameTable' class="table table-hover">
